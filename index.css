@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html { scroll-behavior: smooth; }
+body { background: #0A0A0F; color: #e8e8f0; font-family: 'DM Sans', sans-serif; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { animation: none !important; transition: none !important; } }
+
+@layer components {
+  .glass { @apply rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur-md; }
+  .field { @apply w-full rounded-xl border border-white/10 bg-black/40 px-4 py-3 text-sm text-white placeholder-white/35 outline-none transition focus:border-cyan focus:shadow-cyan; }
+  .btn-cyan { @apply inline-flex items-center justify-center rounded-xl bg-cyan px-6 py-3 font-display font-semibold text-ink transition hover:shadow-cyan hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none; }
+  .btn-ghost { @apply inline-flex items-center justify-center rounded-xl border border-white/15 px-5 py-3 text-sm font-medium text-white transition hover:border-amber hover:text-amber; }
+}
+@keyframes live { 0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255,183,3,.6);} 50% { opacity:.6; box-shadow: 0 0 0 7px rgba(255,183,3,0);} }
+.live-dot { animation: live 1.8s infinite; }
