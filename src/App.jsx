@@ -201,4 +201,54 @@ function Pricing({ notify }) {
     })
     setBusy(false)
     if (error) return notify('Could not send your inquiry. Please try again.', 'err')
-      
+       setF({ name: '', contact: '', budget: '', message: '' })
+    notify('Inquiry sent! We will reply within 24 hours.')
+  }
+
+  return (
+    <section className="mx-auto max-w-6xl px-5 py-16 sm:px-8" id="pricing">
+      <h2 className="font-display text-3xl font-bold">Start with one bundle</h2>
+      <div className="mt-8 grid gap-5 md:grid-cols-2">
+        <div className="relative rounded-2xl border border-amber/60 bg-white/[0.04] p-7 shadow-amber backdrop-blur-md">
+          <h3 className="font-display text-xl font-semibold">Starter Bundle</h3>
+          <p className="mt-3 font-display text-5xl font-bold text-amber">₹2,999</p>
+          <p className="mt-1 text-sm text-white/55">One-time. UPI accepted.</p>
+          <ul className="mt-6 space-y-3 text-sm text-white/80">
+            {['Custom creator web app with your branding', 'Clip submission form and live fan polls', '5 viral CapCut Reels / Shorts', 'Deployed on your own link, mobile-first', 'Delivery in 7 days'].map((t) => (
+              <li key={t} className="flex gap-3"><span className="text-cyan">✓</span>{t}</li>
+            ))}
+          </ul>
+          <a href={LINKS.whatsapp} target="_blank" rel="noreferrer" className="btn-ghost mt-8 w-full">Chat on WhatsApp</a>
+        </div>
+        <form onSubmit={submit} className="glass space-y-3 p-7">
+          <h3 className="font-display text-xl font-semibold">Project inquiry</h3>
+          <input className="field" placeholder="Your name or channel" value={f.name} onChange={set('name')} required maxLength={100} />
+          <input className="field" placeholder="WhatsApp number, Discord or email" value={f.contact} onChange={set('contact')} required minLength={3} maxLength={150} />
+          <select className="field" value={f.budget} onChange={set('budget')}>
+            <option value="">Budget (optional)</option>
+            <option>Under ₹3,000</option><option>₹3,000 – ₹10,000</option><option>₹10,000+</option>
+          </select>
+          <textarea className="field min-h-[110px]" placeholder="Tell us about your channel and what you want built" value={f.message} onChange={set('message')} required maxLength={2000} />
+          <button className="btn-cyan w-full" disabled={busy}>{busy ? 'Sending...' : 'Send inquiry'}</button>
+        </form>
+      </div>
+    </section>
+  )
+}
+
+export default function App() {
+  const [toast, notify] = useToast()
+  return (
+    <div className="min-h-screen">
+      <Hero />
+      <Reels />
+      <Demo notify={notify} />
+      <Pricing notify={notify} />
+      <footer className="border-t border-white/10 px-5 py-8 text-center text-sm text-white/45">
+        © {new Date().getFullYear()} Kashi Devs. Built for Indian creators.
+      </footer>
+      <Toast toast={toast} />
+    </div>
+  )
+}
+  
